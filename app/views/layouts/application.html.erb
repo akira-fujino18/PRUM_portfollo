@@ -9,12 +9,14 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   
+  <div class = "container">
+  
   <header>
     <div class = "header">
-    <div class = "my_portfolio">My Portfolio</div>
-    <%= link_to('signup_path') do %>
+    <a href = "root_path" class = "my_portfolio">My Portfolio</a>
+    <%= link_to 'login' do %>
     <button class= 'login_btn' >ログイン</button>
-    <% end %>
+  <% end %>
   </header>
   
   <body>
@@ -22,7 +24,8 @@
   </body>
   
   <footer>
-    <div class = "footer">user name portfolio site</div> 
+    user name portfolio site
   </footer>
   
+  </div>  
 </html>

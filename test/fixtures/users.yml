@@ -3,11 +3,9 @@
 one:
   name: MyString
   email: MyString
-  self_introduciton: MyString
-  password: MyString
+  introduction: MyString
 
 two:
   name: MyString
   email: MyString
-  self_introduciton: MyString
-  password: MyString
+  introduction: MyString
