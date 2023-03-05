@@ -1,0 +1,22 @@
+<%= provide(:title, 'edit') %>
+
+<div class = "login_form">
+  
+  <h1>自己紹介を編集する</h1>
+  
+  
+    <%= form_with(model: @user, local: true) do |f| %>
+    <%= f.label :introduction, '自己紹介文'%>
+    <%= f.text_area :introduction, class: "edit form_design",row: '5'%>
+    <p class = "limit">200文字以上、800文字未満で入力してください</p>
+    
+    <label class = "image">
+    <%= f.label :avatar, 'アバター画像' %>
+    <div class = "file">
+    <%= f.file_field :avatar,class: 'hidden' %>画像ファイルを添付する
+    </div>
+    </label>
+    
+    <%= f.submit '自己紹介を確定する', class: 'loginning btn' %>
+    <% end %>
+    </div>

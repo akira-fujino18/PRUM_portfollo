@@ -1,0 +1,42 @@
+<%= provide(:title, 'スキル編集') %>
+
+<div class = "main"></div> 
+
+<% @category.each do |category| %>
+<div class = "category_table">
+<div class="category-title"><div class = "border"><%= category.category_name %></div>
+<%= button_to 'スキルを追加する', {controller: 'skills', action: 'new'}, {method: :get, params: {category_id:  category}, class: "adding btn"} %>
+</div>
+
+<%= form_with(model: @user) do |f| %>
+
+<table>
+ <thead>
+  <tr>
+    <td>習得スキル</td>
+    <td>習得レベル</td>
+    <td></td>
+    <td></td>
+    </tr>
+</thead>
+
+<% @skill.each do |skill| %>
+  <tbody>
+    <tr>
+    <td>
+      <% if skill.category.id == category.id %>
+      <%= skill.skill_name %>
+    </td>
+    <td><%= f.number_field :level, value: skill.level, class: 'level_btn' %></td>
+    <td><%= button_to '習得レベルを保存する', {controller: 'skills', action: 'update'}, {method: :post, class: "second update btn"} %></td>
+    <td><%= button_to  '習得スキルを削除する', {controller: 'skills', action: 'destroy'}, {method: :destroy, class: "second delete btn"} %>
+    </td>
+ </tr>
+</tbody>
+ <% end %>
+<% end %>
+</table>
+<% end %>
+</div>
+
+<% end %>

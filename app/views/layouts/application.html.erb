@@ -13,18 +13,29 @@
   
   <header>
     <div class = "header">
-    <a href = "root_path" class = "my_portfolio">My Portfolio</a>
-    <%= link_to 'login' do %>
-    <button class= 'login_btn' >ログイン</button>
-  <% end %>
+    <a href = "/" class = "my_portfolio">My Portfolio</a>
+    
+    <% if current_user %>
+    <%= button_to "ログアウト", {controller: 'sessions', action: 'destroy'}, {method: :delete, class: "login_btn"} %>
+    <% else %>
+    <%= button_to "ログイン", {controller: 'sessions', action: 'new'}, {method: :get, class: "login_btn"} %>
+    <% end %>
   </header>
   
   <body>
+          <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
     <%= yield %>
+    <%= debug(params) if Rails.env.development? %>
   </body>
   
   <footer>
+    <% if logged_in? %>
+    <%= @current_user.name %> portfolio site
+    <% else %>
     user name portfolio site
+    <% end %>
   </footer>
   
   </div>  

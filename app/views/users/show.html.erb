@@ -1,0 +1,59 @@
+<%= provide(:title,"ユーザーページ") %>
+
+<div class = "main"></div>
+  <div class = "body">
+  <div class = "avatar">
+    <%= image_tag 'avatar.png' %>
+  </div>
+  <div class = "introduction">
+  <h1 class = "self">自己紹介</h1>
+  <div class = "introfield"><%= current_user.introduction %></div>
+  
+  <%= button_to '自己紹介を編集する', {controller: 'users', action: 'edit'}, {method: :get, class: "editting btn"} %>  
+  </div>
+
+  </div>
+  
+  <div class = "skill_graph">
+  <h2 class = "skill_chart">スキルチャート</h2>
+  <%= button_to 'スキルを編集する', {controller: 'skills', action: 'edit'}, {method: :get, class: "skilling btn"}  %>
+  </div>
+  
+  <div class = "chart-size">
+  <canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+          labels: ['January', 'February', 'March'],
+          datasets: [{
+            
+            label: 'バックエンド',
+            backgroundColor: '#ffc0cb',
+          }, {
+            
+            label: 'フロントエンド',
+            backgroundColor: '#ffd5bf',
+          }, {
+            
+            label: 'インフラ',
+            backgroundColor: '#fff4bf',
+          }],
+        },
+    options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart'
+      }
+    }
+  },
+      });
+</script>
+</div>
