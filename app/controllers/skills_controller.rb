@@ -2,19 +2,25 @@ class SkillsController < ApplicationController
     
     def new
        @category = Category.find(params[:category_id])
+       
     end
     
     
     def edit
-        @user = User.find(params[:id])
+        @skill = Skill.find(current_user.skills)
         @category = Category.all
-        @skill = Skill.where(user_id: current_user.id)
+        @skills = Skill.where(user_id: current_user.id)
     end
     
     def create
-         
+         @skill = current_user.skills.new(skill_params)
+         if @skill.save
+             redirect_to action 
+         else
+             render 'new', category_id: skill_params
+             flash.now[:alert] = "登録内容に誤りがあります"
+         end
     end
-    
     
     def update
         skill = skill.params
@@ -22,11 +28,19 @@ class SkillsController < ApplicationController
         redirect_to skill_edit_url
     end
     
-    
-    
     def destroy
-        skill = skill.params
-        skill.destroy(skill_params)
-        redirect_to skill_edit_url
+        
+        Skill.find(skill_params).destroy
+        redirect_to edit_skills_path
     end
-end
+    
+private
+    
+    def skill_params
+        byebug
+      params.require(:skill).permit(:id, :skill_name, :level, :category_id)
+    end
+    
+    
+end    
+
